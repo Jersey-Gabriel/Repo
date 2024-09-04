@@ -1,0 +1,323 @@
+---
+title: "RWorksheet_Alpanghe#1.Rmd"
+author: "Jersey Gabriel E. Alpanghe"
+date: "2024-09-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+1. Set up a vector named age, consisting of 34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53, 41,
+51, 35, 24, 33, 41.
+
+a. How many data points?
+  
+  There are 34 data points in total.
+
+b. Write the R code and its output.
+```{r}
+
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+         35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 
+         50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 
+         35, 24, 33, 41)
+
+print(age)
+
+num_data_points <- length(age)
+
+print(paste("Number of data points: ", num_data_points))
+```
+
+
+2.Find the reciprocal of the values for age.
+Write the R code and its output.
+```{r}
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+         35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 
+         50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 
+         35, 24, 33, 41)
+
+reciprocal_age <- 1 / age
+
+print(reciprocal_age)
+```
+
+```{r}
+if (!require(MASS)) install.packages("MASS")
+library(MASS)
+
+fraction_reciprocal_age <- fractions(reciprocal_age)
+
+print(fraction_reciprocal_age)
+
+
+```
+
+3. Assign also new_age <- c(age, 0, age).
+
+```{r}
+
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+         35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 
+         50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 
+         35, 24, 33, 41)
+
+
+new_age <- c(age, 0, age)
+
+
+print(new_age)
+
+```
+
+4.Sort the values for age.
+Write the R code and its output.
+```{r}
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+         35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 
+         50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 
+         35, 24, 33, 41)
+sorted_age <- sort(age)
+
+
+print(sorted_age)
+
+```
+
+5. Find the minimum and maximum value for age.
+Write the R code and its output.
+
+```{r}
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+         35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 
+         50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 
+         35, 24, 33, 41)
+
+min_age <- min(age)
+max_age <- max(age)
+
+print(paste("Minimum age:", min_age))
+print(paste("Maximum age:", max_age))
+
+```
+
+6. Set up a vector named data, consisting of 2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5,
+2.3, 2.5, 2.3, 2.4, and 2.7.
+
+a. How many data points?
+
+There are 12 data points in total.
+
+b.
+```{r}
+data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5,
+          2.3, 2.5, 2.3, 2.4, 2.7)
+
+num_data_points <- length(data)
+
+print(num_data_points)
+
+```
+7. Generates a new vector for data where you double every value of the data.
+
+What happened to the data?
+
+The values within the sequence of data have been doubled.
+
+```{r}
+
+data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5,
+          2.3, 2.5, 2.3, 2.4, 2.7)
+
+
+doubled_data <- data * 2
+
+print(doubled_data)
+
+```
+
+8. Generate a sequence for the following scenario:
+
+8.1 Integers from 1 to 100.
+```{r}
+sequence_8.1 <- 1:100
+print(sequence_8.1)
+
+```
+
+8.2 Numbers from 20 to 60
+```{r}
+sequence_8.2 <- 20:60
+print(sequence_8.2)
+
+```
+
+8.3 Mean of numbers from 20 to 60
+```{r}
+mean_8.3 <- mean(20:60)
+print(mean_8.3)
+
+```
+
+8.4 Sum of numbers from 51 to 91
+```{r}
+sum_8.4 <- sum(51:91)
+print(sum_8.4)
+
+```
+
+8.5 Integers from 1 to 1,000
+```{r}
+sequence_8.5 <- 1:1000
+max_8.5 <- max(sequence_8.5[sequence_8.5 <= 10])
+print(max_8.5)
+
+```
+a. How many data points from 8.1 to 8.4?
+
+There are 183 data points from 8.1 to 8.4 in total.
+
+b. Write the R code and its output from 8.1 to 8.4.
+8.1 Integers from 1 to 100.
+```{r}
+sequence_8.1 <- 1:100
+print(sequence_8.1)
+
+```
+
+8.2 Numbers from 20 to 60
+```{r}
+sequence_8.2 <- 20:60
+print(sequence_8.2)
+
+```
+
+8.3 Mean of numbers from 20 to 60
+```{r}
+mean_8.3 <- mean(20:60)
+print(mean_8.3)
+
+```
+
+8.4 Sum of numbers from 51 to 91
+```{r}
+sum_8.4 <- sum(51:91)
+print(sum_8.4)
+
+```
+
+c. For 8.5 find only maximum data points until 10.
+```{r}
+sequence_8.5 <- 1:1000
+
+max_value_8.5 <- max(sequence_8.5[sequence_8.5 <= 10])
+print(max_value_8.5)
+
+```
+
+9. Print a vector with the integers between 1 and 100 that are not divisible by 3, 5 and 7 using filter option.
+
+```{r}
+sequence <- seq(100)
+
+filtered_numbers <- Filter(function(i) { all(i %% c(3, 5, 7) != 0) }, sequence)
+
+print(filtered_numbers)
+
+```
+
+10. Generate a sequence backwards of the integers from 1 to 100.
+Write the R code and its output.
+
+```{r}
+backwards_sequence <- seq(100, 1, by = -1)
+
+print(backwards_sequence)
+
+```
+
+11. List all the natural numbers below 25 that are multiples of 3 or 5.
+Find the sum of these multiples.
+
+a. How many data points from 10 to 11?
+
+b. Write the R code and its output from 10 and 11.
+  
+  Number10:
+```{r}
+backwards_sequence <- seq(100, 1, by = -1)
+
+print(backwards_sequence)
+
+```
+  Number11:
+  
+```{r}
+upper_limit <- 25
+
+numbers <- 1:(upper_limit - 1)
+
+multiples <- numbers[numbers %% 3 == 0 | numbers %% 5 == 0]
+
+
+sum_multiples <- sum(multiples)
+
+print(multiples)
+print(sum_multiples)
+
+
+```
+
+12. Statements can be grouped together using braces ‘{’ and ‘}’. A group of statements is sometimes called a block. Single statements are evaluated when a new line is typed at the end of the syntactically complete statement. Blocks are not evaluated until a new line is entered after the closing brace.
+Enter this statement:
+x <- {0 + x + 5 + }
+
+Describe the output.
+
+This code will caused a syntax error because the + operator expected another operand but none is provided. Since the block is incomplete, the interpreter will not evaluate the code until it is syntactically correct.
+
+13. Set up a vector named score, consisting of 72, 86, 92, 63, 88, 89, 91, 92, 75,75 and 77. To access individual elements of an atomic vector, one generally uses the x[i] construction.
+Find x[2] and x[3]. 
+
+Write the R code and its output.
+
+```{r}
+
+score <- c(72, 86, 92, 63, 88, 89, 91, 92, 75, 75, 77)
+
+second_element <- score[2]
+third_element <- score[3]
+
+print(second_element)  
+print(third_element)  
+
+```
+
+14. Create a vector a = c(1,2,NA,4,NA,6,7).
+a. Change the NA to 999 using the codes print(a,na.print="-999").
+
+b. Write the R code and its output. Describe the output.
+
+```{r}
+a <- c(1, 2, NA, 4, NA, 6, 7)
+
+print(a, na.print = "-999")
+
+```
+
+15. A special type of function calls can appear on the left hand side of the assignment operator as in > class(x) <- "foo".
+Follow the codes below:
+
+name = readline(prompt="Input your name: ")
+age = readline(prompt="Input your age: ")
+print(paste("My name is",name, "and I am",age ,"years old."))
+print(R.version.string)
+What is the output of the above code?
+
+The output shows the name, and age the user will input and pastes them into the sentence of "My name is,_____, and I am __ years old." along with the R version 4.3.1 (2024-05-20) provided.
