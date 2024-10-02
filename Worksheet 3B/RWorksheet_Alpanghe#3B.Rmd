@@ -1,0 +1,184 @@
+---
+title: "RWorksheet_Alpanghe#3B"
+author: "Jersey Gabriel E. Alpanghe"
+date: "2024-10-02"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+1. Create a data frame using the table below.
+
+a. Write the codes.
+```{r}
+df <- data.frame(
+    Respondent = c(1, 2, 3, 4, 5),
+    Sex = c("Male", "Female", "Male", "Female", "Female"),
+    Father_Occupation = c("Farmer", "Driver", "Others", "Farmer", "Others"),
+    Siblings_Attending = c(5, 2, 3, 6, 4),
+    House_Type = c("Wood", "Concrete", "Wood", "Concrete", "Semi-Concrete")
+)
+```
+
+b. Describe the data. Get the structure or the summary of the data
+
+```{r}
+str(df)
+summary(df)
+
+```
+
+
+Figure 1: R Chunk
+
+c. Is the mean number of siblings attending is 5?
+```{r}
+mean(df$Siblings_Attending) == 5
+
+```
+
+
+d. Extract the 1st two rows and then all the columns using the subsetting functions. Write the codes and its output.
+```{r}
+df[1:2, ]
+
+```
+
+e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+```{r}
+df[c(3, 5), c(2, 4)]
+
+```
+
+f. Select the variable types of houses then store the vector that results as types_houses. Write the codes.
+```{r}
+types_houses <- df$House_Type
+types_houses
+
+```
+
+
+g. Select only all Males respondent that their father occupation was farmer. Write the codes and its output.
+```{r}
+subset(df, Sex == "Male" & Father_Occupation == "Farmer")
+
+```
+
+
+h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
+
+```{r}
+subset(df, Sex == "Female" & Siblings_Attending >= 5)
+
+```
+
+
+2. Write a R program to create an empty data frame. Using the following codes:
+```{r}
+df = data.frame(Ints=integer(),
+Doubles=double(), Characters=character(),
+Logicals=logical(),
+Factors=factor(),
+stringsAsFactors=FALSE)
+
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+a. Describe the results.
+Output:
+[1] "Structure of the empty dataframe:"
+'data.frame':	0 obs. of  5 variables:
+ $ Ints      : int 
+ $ Doubles   : num 
+ $ Characters: chr 
+ $ Logicals  : logi 
+ $ Factors   : Factor w/ 0 levels: 
+NULL
+
+3. Create a .csv file of this. Save it as HouseholdData.csv
+
+Figure 2: Figure 2: Sentiment Analysis
+
+a. Import the csv file into the R environment. Write the codes.
+```{r}
+household_data <- read.csv("HouseholdData.csv")
+```
+
+b. Convert the Sex into factor using factor() function and change it into integer.[Legend: Male = 1 and Female = 2]. Write the R codes and its output.
+```{r}
+household_data$Sex <- factor(household_data$Sex, levels = c("Male", "Female"), labels = c(1, 2))
+household_data
+
+```
+
+
+c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood = 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
+```{r}
+household_data$House_Type <- factor(household_data$Types.of.Houses, levels = c("Wood", "Concrete", "Semi-Concrete"), labels = c(1, 2, 3))
+household_data
+
+```
+
+
+d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What is the R code and its output?
+```{r}
+household_data$Father_Occupation <- factor(household_data$Fathers.Occupation, levels = c("Farmer", "Driver", "Others"), labels = c(1, 2, 3))
+household_data
+
+```
+
+
+e. Select only all females respondent that has a father whose occupation is driver. Write the codes and its output.
+```{r}
+subset(household_data, Sex == 2 & Fathers.Occupation == 2)
+
+```
+
+
+f. Select the respondents that have greater than or equal to 5 number of siblings attending
+school. Write the codes and its output.
+
+```{r}
+subset(household_data, Siblings.at.School >= 5)
+
+```
+
+
+
+
+
+4. Interpret the graph.
+
+Graph Title: "Sentiments Of Tweets Per Day" Sentiment Analysis on the basis of tweets for a few days (July 14, 2020-July 21, 2020). The sentiment has been classified into three types: Negative (red), Neutral (blue), and Positive (orange).
+
+
+July 14, 2020:
+Majority of the tweets are negative in nature.
+Neutral sentiments occupy a slightly higher percentage
+The minimum percentage of positive sentiments
+
+July 15, 2020:
+There is more than 4000 of negativity with tweets, that is the highest number during the picked period.
+Next comes the neutral ones, which represent the least of positivity.
+
+July 17, 2020:
+Positive and negative have a corresponding number with themselves where both equal each other
+Neutral exceeds the number of negative ones, whereas the positivity ranks as the least.
+
+July 18, 2020:
+Negative corresponds to the highest number
+The count of neutral is lower than that of negative and also positivity is the least.
+
+July 20, 2020:
+Bad ones again lead the number, this time by neutral ones.
+Positive ones stay within low range.
+
+July 21, 2020:
+Bad ones are again out of the pack and this time nigh to 4000.
+Neutral and good ones have nearly the same number with neutral being slightly ahead.
+
+Overall:
+In the entire observed period, bad ones always lead the pack and have the highest number, thus indicating that negativity leads the ways in conversations on these dates.Neutral tweets always appear as the second-highest and positive as the lowest frequency across all dates. The spikes of negative sentiment are especially very high on July 15 and July 21.
+
+This pattern may reflect some events or subjects, which provoked the strongest felt emotion-bias toward negative sentiments, specially during this period.
