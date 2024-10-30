@@ -1,0 +1,207 @@
+---
+title: "RWorksheet_Alpanghe#4b"
+author: "Jersey Gabriel E. Alpanghe"
+date: "2024-10-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+
+```{r}
+vectorA <- c(1,2,3,4,5)
+matrixB <- matrix(0, nrow = 5, ncol = 5)
+
+for (i in 1:5){
+  for (j in 1:5){
+    matrixB[i,j] <- abs(i - j) 
+  }
+}
+
+print(matrixB)
+```
+
+2. Print the string "*" using for() function. The output should be the same as shown in Figure 2.
+```{r}
+for (i in 1:5) {
+  cat(rep("*", i), "\n")
+}
+```
+
+3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+```{r}
+# Get the starting number from the user
+start_number <- readline("Enter the starting number for the Fibonacci sequence: ")
+
+# Convert the input to numeric
+start_number <- as.numeric(start_number)
+
+# Check if the input is valid
+if (is.na(start_number) || start_number < 1) {
+  cat("Invalid input. Please enter a positive integer.\n")
+} else {
+  a <- 0
+  b <- 1
+  
+  cat(a, " ")
+    repeat {
+    c <- a + b
+        cat(c, " ")
+        a <- b
+    b <- c
+    
+    if (c > 500) {
+      break
+    }
+  }
+}
+```
+
+4. Import the dataset as shown in Figure 1 you have created previously.
+
+a. What is the R script for importing an excel or a csv file? Display the first 6 rows of the dataset? Show your codes and its result
+
+```{r}
+shoes <- read.csv("shoes.csv")
+head(shoes)
+```
+
+b. Create a subset for gender(female and male). How many observations are there in Male? How about in Female? Write the R scripts and its output.
+
+```{r}
+male_data <- subset(shoes, Gender == "M")
+male_count <- nrow(male_data)
+
+female_data <- subset(shoes, Gender == "F")
+female_count <- nrow(female_data)
+
+cat("Number of Males: ", male_count, "\n")
+cat("Number of Females: ", female_count, "\n")
+
+```
+
+```{r}
+
+gender_counts <- table(shoes$Gender)
+num_male <- nrow(shoes, Gender == "M")
+num_female <- nrow(shoes, Gender == "F")
+
+gender_counts <- c(num_male, num_female)
+
+gender_labels <- c("Male", "Female")
+colors <- c("skyblue", "pink")
+
+barplot(
+  gender_counts,
+  names.arg = gender_labels,
+  col = colors,
+  main = "Number of Males and Females in Household Data",
+  xlab = "Gender",
+  ylab = "Count",
+  ylim = c(0, max(gender_counts) + 2)
+)
+
+legend("topright", legend = gender_labels, fill = colors)
+
+```
+
+5. The monthly income of Dela Cruz family was spent on the following:
+
+a. Create a piechart that will include labels in percentage.Add some colors and title of the chart. Write the R scripts and show its output.
+
+```{r}
+# Define the data
+expenses <- c(Food = 60, Electricity = 10, Savings = 5, Miscellaneous = 25)
+
+# Calculate percentages for labels
+percent_labels <- paste0(names(expenses), ": ", round(expenses / sum(expenses) * 100, 1), "%")
+
+# Create the pie chart
+pie(
+  expenses,
+  labels = percent_labels,
+  main = "Dela Cruz Family Monthly Expenses",
+  col = c("darkgreen", "blue", "pink", "red") # Add colors for each category
+)
+
+```
+
+6. Use the iris dataset.
+data(iris)
+
+a. Check for the structure of the dataset using the str() function. Describe what you have seen in the output.
+```{r}
+data(iris)
+
+str(iris)
+```
+
+
+
+b. Create an R object that will contain the mean of the sepal.length,
+sepal.width,petal.length,and petal.width. What is the R script and its result?
+
+```{r}
+mean_values <- colMeans(iris[, 1:4])
+
+mean_values
+
+```
+
+c. Create a pie chart for the Species distribution. Add title, legends, and colors. Write the R script and its result.
+
+```{r}
+species <- table(iris$Species)
+
+pie(
+  species, main = "Species Distribution (Iris)",
+  col = c("lightblue", "lightgreen", "lightyellow"), labels = paste(names(species), ":", species), legend.text = names(species)
+)
+```
+
+d. Subset the species into setosa, versicolor, and virginica. Write the R scripts and show the last six (6) rows of each species.
+
+```{r}
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+
+tail(setosa)
+tail(versicolor)
+tail(virginica)
+```
+
+e. Create a scatterplot of the sepal.length and sepal.width using the different
+species(setosa,versicolor,virginica). Add a title = “Iris Dataset”, subtitle = “Sepal width and length, labels for the x and y axis, the pch symbol and colors should be based on the species.
+
+```{r}
+# Convert Species to a factor if it isn't already
+iris$Species <- as.factor(iris$Species)
+
+# Plot scatterplot with color coding by species
+plot(
+  iris$Sepal.Length, iris$Sepal.Width,
+  main = "Iris Dataset",
+  sub = "Sepal Width and Length",
+  xlab = "Sepal Length",
+  ylab = "Sepal Width",
+  pch = 19, # Symbol for points
+  col = as.numeric(iris$Species)
+)
+
+# Add a legend for species
+legend(
+  "topright",
+  legend = levels(iris$Species),
+  col = 1:3, pch = 19
+)
+
+```
+
+
+f. Interpret the result.
+
+The different colors for each species show clear clusters, indicating that the species have distinct sepal measurements. Setosa tends to be well-separated from versicolor and virginica in terms of both Sepal.Length and Sepal.Width. versicolor and virginica, however, may overlap slightly, especially in sepal width, but still display a general trend that helps distinguish them.
