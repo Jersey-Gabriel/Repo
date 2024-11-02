@@ -84,16 +84,18 @@ cat("Number of Females: ", female_count, "\n")
 ```
 
 ```{r}
+# Count the number of Male and Female observations
+num_male <- nrow(male_data)
+num_female <- nrow(female_data)
 
-gender_counts <- table(shoes$Gender)
-num_male <- nrow(shoes, Gender == "M")
-num_female <- nrow(shoes, Gender == "F")
-
+# Create a vector with the counts
 gender_counts <- c(num_male, num_female)
 
+# Define labels and colors for the plot
 gender_labels <- c("Male", "Female")
 colors <- c("skyblue", "pink")
 
+# Create a bar plot
 barplot(
   gender_counts,
   names.arg = gender_labels,
@@ -104,7 +106,9 @@ barplot(
   ylim = c(0, max(gender_counts) + 2)
 )
 
+# Add a legend
 legend("topright", legend = gender_labels, fill = colors)
+
 
 ```
 
@@ -113,13 +117,10 @@ legend("topright", legend = gender_labels, fill = colors)
 a. Create a piechart that will include labels in percentage.Add some colors and title of the chart. Write the R scripts and show its output.
 
 ```{r}
-# Define the data
 expenses <- c(Food = 60, Electricity = 10, Savings = 5, Miscellaneous = 25)
 
-# Calculate percentages for labels
 percent_labels <- paste0(names(expenses), ": ", round(expenses / sum(expenses) * 100, 1), "%")
 
-# Create the pie chart
 pie(
   expenses,
   labels = percent_labels,
@@ -162,6 +163,8 @@ pie(
 )
 ```
 
+
+
 d. Subset the species into setosa, versicolor, and virginica. Write the R scripts and show the last six (6) rows of each species.
 
 ```{r}
@@ -178,10 +181,8 @@ e. Create a scatterplot of the sepal.length and sepal.width using the different
 species(setosa,versicolor,virginica). Add a title = “Iris Dataset”, subtitle = “Sepal width and length, labels for the x and y axis, the pch symbol and colors should be based on the species.
 
 ```{r}
-# Convert Species to a factor if it isn't already
 iris$Species <- as.factor(iris$Species)
 
-# Plot scatterplot with color coding by species
 plot(
   iris$Sepal.Length, iris$Sepal.Width,
   main = "Iris Dataset",
@@ -192,7 +193,6 @@ plot(
   col = as.numeric(iris$Species)
 )
 
-# Add a legend for species
 legend(
   "topright",
   legend = levels(iris$Species),
@@ -205,3 +205,69 @@ legend(
 f. Interpret the result.
 
 The different colors for each species show clear clusters, indicating that the species have distinct sepal measurements. Setosa tends to be well-separated from versicolor and virginica in terms of both Sepal.Length and Sepal.Width. versicolor and virginica, however, may overlap slightly, especially in sepal width, but still display a general trend that helps distinguish them.
+
+7. Import the alexa-file.xlsx. Check on the variations. Notice that there are ex-
+tra whitespaces among black variants (Black Dot, Black Plus, Black Show, Black Spot). Also on the white variants (White Dot, White Plus, White Show, White
+Spot).
+
+a. Rename the white and black variants by using gsub() function.
+```{r}
+library(readxl)
+alexa_data <- read_excel("alexa_file.xlsx")
+
+alexa_data$variation <- gsub("Black\\s+Dot", "BlackDot", alexa_data$variation)
+alexa_data$variation <- gsub("Black\\s+Plus", "BlackPlus", alexa_data$variation)
+alexa_data$variation <- gsub("Black\\s+Show", "BlackShow", alexa_data$variation)
+alexa_data$variation <- gsub("Black\\s+Spot", "BlackSpot", alexa_data$variation)
+
+alexa_data$variation <- gsub("White\\s+Dot", "WhiteDot", alexa_data$variation)
+alexa_data$variation <- gsub("White\\s+Plus", "WhitePlus", alexa_data$variation)
+alexa_data$variation <- gsub("White\\s+Show", "WhiteShow", alexa_data$variation)
+alexa_data$variation <- gsub("White\\s+Spot", "WhiteSpot", alexa_data$variation)
+
+head(alexa_data$variation)
+
+```
+
+b. Get the total number of each variations and save it into another object. Save the object as variations.RData. Write the R scripts. What is its result?
+
+```{r}
+library(dplyr)
+variation_counts <- alexa_data %>%
+    count(variation)
+
+save(variation_counts, file = "variations.RData")
+
+print(variation_counts)
+
+
+```
+c. From the variations.RData, create a barplot(). Complete the details of the chart
+which include the title, color, labels of each bar.
+
+```{r}
+barplot(variation_counts$n, 
+        names.arg = variation_counts$variation, 
+        main = "Distribution of Alexa Variants", 
+        col = "skyblue", 
+        ylab = "Count", 
+        las = 2)
+
+```
+d. Create a barplot() for the black and white variations. Plot it in 1 frame, side by
+side. Complete the details of the chart.
+
+```{r}
+black_white_counts <- variation_counts %>%
+    filter(grepl("Black", variation) | grepl("White", variation))
+
+barplot(height = black_white_counts$n, 
+        names.arg = black_white_counts$variation, 
+        beside = TRUE, 
+        col = c("black", "grey"), 
+        main = "Black and White Alexa Variants", 
+        xlab = "Variations", 
+        ylab = "Count", 
+        legend.text = c("Black Variants", "White Variants"))
+
+```
